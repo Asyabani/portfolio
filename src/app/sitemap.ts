@@ -3,6 +3,9 @@ import { projects } from '@/lib/data/projects';
 import { certificates } from '@/lib/data/certificates';
 import { SITE_URL } from '@/lib/site';
 
+// Required for the static (GitHub Pages) export
+export const dynamic = 'force-static';
+
 // Static site: no per-entry timestamps in the data, so one build-time date.
 const lastModified = new Date();
 

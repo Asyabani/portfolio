@@ -1,5 +1,8 @@
 import { ImageResponse } from 'next/og';
 
+// Required for the static (GitHub Pages) export
+export const dynamic = 'force-static';
+
 // Social preview card — navy + teal, same language as the site hero.
 export const alt = 'Nurzaman Asyabani — Frontend & Fullstack Developer';
 export const size = { width: 1200, height: 630 };

@@ -77,6 +77,9 @@ const SECTIONS = [
   },
 ];
 
+// Inline background paths don't get Next's basePath automatically — prefix
+// manually so the GitHub Pages build (served under /portfolio) still resolves.
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 const BACKGROUNDS = [
   '/img/about/p1.webp',
   '/img/about/p2.webp',
@@ -88,7 +91,7 @@ const BACKGROUNDS = [
   '/img/about/p8.webp',
   '/img/about/p1.webp',
   '/img/about/p2.webp',
-];
+].map(path => `${BASE_PATH}${path}`);
 
 const SOUND_URLS = {
   hover: 'https://assets.codepen.io/7558/click-reverb-001.mp3',
