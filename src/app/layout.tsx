@@ -207,9 +207,9 @@ export default function RootLayout({
                     document.documentElement.classList.add('loader-skip');
                   }
 
+                  // Light is the default; dark only when the visitor chose it
                   const theme = localStorage.getItem('theme');
-                  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  if (theme === 'dark' || (!theme && systemPrefersDark)) {
+                  if (theme === 'dark') {
                     document.documentElement.classList.add('dark');
                   } else {
                     document.documentElement.classList.remove('dark');
