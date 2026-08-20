@@ -147,8 +147,8 @@ export function HeroAnimated() {
         }}
       />
 
-      <div className="container mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 py-24 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
+      <div className="container mx-auto px-6 sm:px-10 lg:px-16 xl:px-24 py-16 sm:py-24 relative z-10">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-9 sm:gap-12 lg:gap-8">
           {/* ── Left: Headline ── */}
           <div className="flex-1 max-w-2xl">
             {/* Eyebrow: who + what — the one line a visitor should read first */}
@@ -159,7 +159,7 @@ export function HeroAnimated() {
               <span className="text-dark dark:text-white">Nurzaman Asyabani</span>
               <span
                 aria-hidden="true"
-                className="h-px w-6 bg-primary/70 dark:bg-teal-400/70"
+                className="hidden h-px w-6 bg-primary/70 dark:bg-teal-400/70 sm:block"
               />
               <span className="text-primary dark:text-teal-400">
                 Fullstack Developer
@@ -229,17 +229,17 @@ export function HeroAnimated() {
             {/* CTA pair: primary (work) + secondary (contact) */}
             <div
               ref={ctaRef}
-              className="mt-8 md:mt-12 flex flex-wrap items-center gap-3 sm:gap-4"
+              className="mt-8 md:mt-12 flex flex-wrap items-center gap-2.5 sm:gap-4"
             >
               <Link
                 href="/projects"
-                className="inline-flex items-center justify-center gap-3 bg-primary text-white hover:bg-teal-700 dark:bg-teal-400 dark:text-[#050b23] dark:hover:bg-teal-300 text-[11px] sm:text-xs font-semibold tracking-[0.2em] uppercase px-6 sm:px-10 py-3 sm:py-4 rounded-full shadow-[0_10px_30px_rgba(13,148,136,0.28)] transition-all duration-300"
+                className="inline-flex items-center justify-center gap-3 bg-primary text-white hover:bg-teal-700 dark:bg-teal-400 dark:text-[#050b23] dark:hover:bg-teal-300 text-[11px] sm:text-xs font-semibold tracking-[0.14em] sm:tracking-[0.2em] uppercase px-5 sm:px-10 py-3 sm:py-4 rounded-full shadow-[0_10px_30px_rgba(13,148,136,0.28)] transition-all duration-300"
               >
                 View My Projects
               </Link>
               <a
                 href={socialLinks.email}
-                className="inline-flex items-center justify-center gap-3 border border-dark/30 dark:border-white/30 text-dark/80 dark:text-white/80 hover:text-dark dark:hover:text-white hover:border-dark/70 dark:hover:border-white/70 text-[11px] sm:text-xs font-semibold tracking-[0.2em] uppercase px-6 sm:px-10 py-3 sm:py-4 rounded-full transition-all duration-300"
+                className="inline-flex items-center justify-center gap-3 border border-dark/30 dark:border-white/30 text-dark/80 dark:text-white/80 hover:text-dark dark:hover:text-white hover:border-dark/70 dark:hover:border-white/70 text-[11px] sm:text-xs font-semibold tracking-[0.14em] sm:tracking-[0.2em] uppercase px-5 sm:px-10 py-3 sm:py-4 rounded-full transition-all duration-300"
               >
                 Let&apos;s Talk
               </a>
@@ -251,7 +251,7 @@ export function HeroAnimated() {
             ref={photoRef}
             className="shrink-0 flex items-center justify-center"
           >
-            <div className="relative w-52 h-52 sm:w-80 sm:h-80 lg:w-104 lg:h-104 rounded-full overflow-hidden bg-white/5 shadow-2xl">
+            <div className="relative w-44 h-44 sm:w-80 sm:h-80 lg:w-104 lg:h-104 rounded-full overflow-hidden bg-white/5 shadow-2xl">
               <Image
                 src="/img/profile-2026.jpg"
                 alt="Nurzaman Asyabani"
