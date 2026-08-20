@@ -77,41 +77,9 @@ export function FeaturedCaseStudies({
         section
           .querySelectorAll<HTMLElement>('[data-cs-row]')
           .forEach(row => {
-            const media = row.querySelector<HTMLElement>('[data-cs-media]');
-            const parallax = row.querySelector<HTMLElement>('[data-cs-parallax]');
             const metaItems = row.querySelectorAll<HTMLElement>(
               '[data-cs-meta] > *'
             );
-
-            if (media) {
-              gsap.fromTo(
-                media,
-                { clipPath: 'inset(10% 7% 10% 7% round 15px)', scale: 0.97 },
-                {
-                  clipPath: 'inset(0% 0% 0% 0% round 15px)',
-                  scale: 1,
-                  duration: 1.2,
-                  ease: 'power3.out',
-                  scrollTrigger: { trigger: row, start: 'top 78%' },
-                }
-              );
-            }
-            if (parallax) {
-              gsap.fromTo(
-                parallax,
-                { yPercent: -7 },
-                {
-                  yPercent: 7,
-                  ease: 'none',
-                  scrollTrigger: {
-                    trigger: row,
-                    start: 'top bottom',
-                    end: 'bottom top',
-                    scrub: true,
-                  },
-                }
-              );
-            }
             if (metaItems.length) {
               gsap.fromTo(
                 metaItems,
@@ -128,6 +96,73 @@ export function FeaturedCaseStudies({
             }
           });
       });
+
+      /* Cover reveal + scrubbed parallax are desktop-only: per-frame clip-path
+         and transform work stutters on phones */
+      mm.add(
+        '(min-width: 768px) and (prefers-reduced-motion: no-preference)',
+        () => {
+          section
+            .querySelectorAll<HTMLElement>('[data-cs-row]')
+            .forEach(row => {
+              const media = row.querySelector<HTMLElement>('[data-cs-media]');
+              const parallax =
+                row.querySelector<HTMLElement>('[data-cs-parallax]');
+
+              if (media) {
+                gsap.fromTo(
+                  media,
+                  { clipPath: 'inset(10% 7% 10% 7% round 15px)', scale: 0.97 },
+                  {
+                    clipPath: 'inset(0% 0% 0% 0% round 15px)',
+                    scale: 1,
+                    duration: 1.2,
+                    ease: 'power3.out',
+                    scrollTrigger: { trigger: row, start: 'top 78%' },
+                  }
+                );
+              }
+              if (parallax) {
+                gsap.fromTo(
+                  parallax,
+                  { yPercent: -7 },
+                  {
+                    yPercent: 7,
+                    ease: 'none',
+                    scrollTrigger: {
+                      trigger: row,
+                      start: 'top bottom',
+                      end: 'bottom top',
+                      scrub: true,
+                    },
+                  }
+                );
+              }
+            });
+        }
+      );
+
+      /* Mobile: one cheap fade-up per cover instead */
+      mm.add(
+        '(max-width: 767px) and (prefers-reduced-motion: no-preference)',
+        () => {
+          section
+            .querySelectorAll<HTMLElement>('[data-cs-media]')
+            .forEach(media => {
+              gsap.fromTo(
+                media,
+                { y: 24, opacity: 0 },
+                {
+                  y: 0,
+                  opacity: 1,
+                  duration: 0.7,
+                  ease: 'power3.out',
+                  scrollTrigger: { trigger: media, start: 'top 88%' },
+                }
+              );
+            });
+        }
+      );
     }, section);
 
     return () => ctx.revert();

@@ -36,6 +36,13 @@ export function ProjectCardAnimated({ project }: { project: Project }) {
     let initialLetterSpacing: string | null = null;
     if (!card || !imageContainer) return;
 
+    // Phones: play entrances once — replaying (and re-scrambling tags) on every
+    // scroll pass causes visible jank on low-power devices
+    const isMobile = window.matchMedia('(max-width: 767px)').matches;
+    const toggleActions = isMobile
+      ? 'play none none none'
+      : 'play reverse play reverse';
+
     if (arrowIcon) {
       gsap.set(arrowIcon, { opacity: 0, x: -12, rotate: 0 });
     }
@@ -79,7 +86,7 @@ export function ProjectCardAnimated({ project }: { project: Project }) {
           trigger: card,
           start: 'top 95%',
           end: 'bottom 20%',
-          toggleActions: 'play reverse play reverse',
+          toggleActions,
         },
       }
     );
@@ -103,7 +110,7 @@ export function ProjectCardAnimated({ project }: { project: Project }) {
             trigger: card,
             start: 'top 95%',
             end: 'bottom 20%',
-            toggleActions: 'play reverse play reverse',
+            toggleActions,
           },
         }
       );
@@ -144,7 +151,7 @@ export function ProjectCardAnimated({ project }: { project: Project }) {
             trigger: card,
             start: 'top 95%',
             end: 'bottom 20%',
-            toggleActions: 'play reverse play reverse',
+            toggleActions,
           },
         });
 
