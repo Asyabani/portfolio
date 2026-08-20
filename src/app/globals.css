@@ -1,0 +1,585 @@
+@import 'tailwindcss';
+
+/* Configure class-based dark mode */
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #0d9488;
+  --color-secondary: #64748b;
+  --color-dark: #0f172a;
+}
+
+html {
+  /* Hide native scrollbar */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  /* Lock scroll from first paint — ProgressBar JS will release it after loading */
+  overflow: hidden;
+}
+
+html.global-loader-active,
+html.global-loader-active body {
+  overflow: hidden;
+  background-color: #050b23;
+  color: #f8fafc;
+}
+
+/* ── Hide everything except the loader while loading ── */
+/* Navbar */
+html.global-loader-active header,
+html.global-loader-active nav {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Main page content */
+html.global-loader-active main,
+html.global-loader-active footer,
+html.global-loader-active .custom-scrollbar-overlay {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+/* Page reveal zoom animation — triggered by JS adding .page-reveal-active to <html>
+   right after the loader leaves (removed again ~1s later so later route changes
+   don't replay it) */
+@keyframes page-reveal {
+  from {
+    opacity: 0;
+    transform: scale(1.07);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0px);
+  }
+}
+
+/* `backwards`, not `both`: once the reveal ends the transform/filter must go
+   back to none, otherwise <main> stays a containing block and any
+   position: fixed descendant (About page's pinned stage) scrolls away with it */
+html.page-reveal-active main {
+  animation: page-reveal 0.85s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+/* Footer fades in smoothly after loader — delayed so it doesn't flash */
+footer {
+  animation: none;
+  transition:
+    opacity 0.6s ease 0.4s,
+    visibility 0s ease 0.4s;
+}
+
+html.global-loader-active footer {
+  transition: none;
+}
+
+/* main/footer are hidden during loading via global-loader-active.
+   No transition needed here — page-reveal-active keyframe controls the entrance. */
+/* ─────────────────────────────────────────────────── */
+
+html::-webkit-scrollbar {
+  display: none;
+}
+
+html.global-loader-active .custom-scrollbar-overlay {
+  display: none;
+}
+
+.custom-scrollbar-overlay {
+  opacity: 1;
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html:not(.projects-hero-active) .custom-scrollbar-overlay {
+  opacity: 1;
+  transition-delay: 0.3s;
+}
+
+.projects-hero-active .custom-scrollbar-overlay {
+  opacity: 0;
+  pointer-events: none;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+/* Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Glass Morphism Effect */
+.glass {
+  backdrop-filter: blur(5px);
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.navbar-fixed {
+  position: fixed;
+  z-index: 9999;
+  background: transparent;
+  backdrop-filter: none;
+  box-shadow: none;
+  border-bottom: none;
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    padding 0.3s ease;
+  opacity: 1;
+}
+
+html:not(.projects-hero-active) .navbar-fixed {
+  opacity: 1;
+  transition-delay: 0.15s;
+}
+
+.dark .navbar-fixed {
+  background: transparent;
+  border-bottom: none;
+  box-shadow: none;
+}
+
+/* Hamburger Menu Lines */
+.hamburger-line {
+  width: 22px;
+  height: 2px;
+  margin: 5px 0;
+  display: block;
+  background-color: #0f172a;
+  transition: all 0.3s ease-in-out;
+}
+
+.dark .hamburger-line {
+  background-color: #ededed;
+}
+
+/* About page sits on full-bleed dark photos — keep the nav controls light
+   until the scrolled backdrop appears, in both themes */
+.navbar-on-photo .hamburger-line {
+  background-color: #ededed;
+}
+
+.hamburger-active > span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger-active > span:nth-child(2) {
+  transform: scale(0);
+  opacity: 0;
+}
+
+.hamburger-active > span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Card Styling */
+.card {
+  background-color: transparent;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+/* Certificate Card Styling */
+.card-body-cert {
+  transition: all 0.3s ease;
+}
+
+/* Project Card Image Container */
+.card-body {
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+/* Character Reveal Animation */
+.char-reveal,
+.word-reveal {
+  perspective: 1000px;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+  display: inline-block;
+  vertical-align: baseline;
+  box-sizing: content-box;
+  padding: 0;
+  border: none;
+  font-weight: 600 !important;
+  font-size: 20px !important;
+}
+
+/* Dark mode for animated text */
+.is-dark-mode .char-reveal,
+.is-dark-mode .word-reveal {
+  color: #ffffff !important;
+}
+
+.is-dark-mode .word-reveal {
+  color: #2dd4bf !important;
+}
+
+.projects-hero-overlay {
+  overflow: hidden;
+}
+
+.projects-hero-backdrop {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background: #050b23;
+  transform-origin: bottom center;
+  transform: scaleY(1);
+  pointer-events: none;
+  will-change: transform, background-color;
+}
+
+.projects-hero-active .navbar-fixed {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+.projects-hero-active body {
+  overflow: hidden;
+  color: #f2f0e9;
+}
+
+.dark .projects-hero-active body,
+.dark.projects-hero-active body {
+  background-color: #050b23;
+}
+
+html:not(.dark) .projects-hero-active body {
+  background-color: #f0f1fa;
+}
+
+.projects-hero-active .projects-page-content {
+  pointer-events: none;
+  user-select: none;
+}
+
+.projects-hero-highlight {
+  display: inline-block;
+}
+
+.projects-hero-highlight-text {
+  display: inline-block;
+}
+
+.projects-page-content {
+  opacity: 1;
+}
+
+/* ─── Sticky hero lead ─────────────────────────────────────────────────────── */
+/* The "ASYABANI'S PROJECT" section stays fixed while the reveal panel slides over it */
+.projects-hero-lead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  will-change: transform;
+}
+
+/* ─── Scroll-reveal overlay panel ─────────────────────────────────────────── */
+/* Spacer: 200 vh tall so GSAP has a full viewport of scroll travel */
+.projects-scroll-reveal-spacer {
+  position: relative;
+  height: 200vh;
+  /* Pull the spacer up so it overlaps the sticky hero layout */
+  margin-top: -100vh;
+  /* Extra bottom space so the footer is reachable after the sticky panel */
+  padding-bottom: 100vh;
+  z-index: 2;
+}
+
+/* Sticky inner panel: stays glued to top while spacer scrolls */
+/* GSAP animates translateY(100vh → 0) driven by spacer scroll position */
+.projects-scroll-reveal {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  min-height: 100vh;
+  background: #f0f1fa;
+  border-radius: 0.75rem 0.75rem 0 0;
+  box-shadow: 0 -24px 80px rgba(0, 0, 0, 0.18);
+  will-change: transform;
+  overflow: hidden;
+}
+
+.dark .projects-scroll-reveal {
+  background: #050b23;
+  box-shadow: 0 -24px 80px rgba(0, 0, 0, 0.55);
+}
+
+/* ─── Portfolio (homepage) scroll-reveal curtain ──────────────────────────── */
+.portfolio-scroll-reveal-spacer {
+  position: relative;
+  z-index: 2;
+}
+
+.portfolio-scroll-reveal {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: #f5f6ff;
+  border-radius: 1rem 1rem 0 0;
+  box-shadow: 0 -24px 80px rgba(0, 0, 0, 0.12);
+  will-change: transform;
+}
+
+.dark .portfolio-scroll-reveal {
+  background: #081226;
+  box-shadow: 0 -24px 80px rgba(0, 0, 0, 0.5);
+}
+
+.projects-hero-active .projects-page-section {
+  pointer-events: none;
+}
+
+.projects-world {
+  position: relative;
+  isolation: isolate;
+  /* Break out of any ancestor padding/max-width */
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  height: 100vh;
+  min-height: 500px;
+  overflow: hidden;
+  background: #f0f1fa;
+}
+
+.dark .projects-world {
+  background: #050b23;
+}
+
+.projects-world-scroll {
+  display: none;
+}
+.projects-world-surface {
+  display: none;
+}
+.projects-world-surface .projects-page-grid {
+  display: none;
+}
+.projects-world-rows {
+  display: none;
+}
+.projects-world-row {
+  display: none;
+}
+.projects-world-row-track {
+  display: none;
+}
+
+/* ── Projects world — cylinder warp ── */
+
+/* Stage: perspective origin at centre — creates the concave/inside-globe feel */
+.pw-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  perspective: 900px;
+  perspective-origin: 50% 50%;
+}
+
+/* Flat scrolling track — JS drives translateX, children are warped per-frame */
+.pw-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+/* Individual card — positioned by JS (left/top), curved by per-frame transform */
+.pw-card {
+  position: absolute;
+  display: block;
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  /* overflow must be visible so neighbouring peek-cards aren't clipped */
+  overflow: visible;
+}
+
+.pw-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 18px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.28),
+    0 2px 8px rgba(0, 0, 0, 0.18);
+  transition: box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pw-card:hover .pw-card-inner {
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.48),
+    0 4px 16px rgba(0, 0, 0, 0.24);
+}
+
+/* 3-D backdrop container — lives inside .pw-stage, shares its perspective */
+.pw-backdrop-3d {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  transform-style: preserve-3d;
+}
+
+/* Individual "WORK" word — warped by JS onto the cylinder wall */
+.pw-backdrop-word {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* baseline translate so JS transforms rotate around word centre */
+  translate: -50% -50%;
+  transform-origin: 50% 50% 0;
+  white-space: nowrap;
+  font-size: clamp(5rem, 20vw, 14rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.07);
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.dark .pw-backdrop-word {
+  color: rgba(255, 255, 255, 0.055);
+}
+
+.projects-world-backdrop-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(2.8rem, 12vw, 9rem);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.06);
+  text-align: center;
+  line-height: 0.9;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dark .projects-world-backdrop-text {
+  color: rgba(255, 255, 255, 0.06);
+}
+
+.projects-world-backdrop-text span {
+  display: block;
+}
+
+.projects-world-backdrop-text span:last-child {
+  margin-top: -0.35em;
+}
+
+/* tile styles are now inside .projects-world-rows above */
+
+.projects-page-grid [data-project-tile] {
+  opacity: 1;
+  transition:
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+/* ── Loader skipped (already seen this session / reduced motion) ── */
+/* Hide the SSR'd loader markup until React removes it, and let the page scroll */
+html.loader-skip {
+  overflow: auto;
+}
+
+html.loader-skip #global-loader {
+  display: none;
+}
+
+/* ── Reduced motion: collapse CSS animations/transitions to an instant ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Resume page: print as a clean A4 document ── */
+@page {
+  size: A4;
+  margin: 14mm 14mm 16mm;
+}
+
+@media print {
+  html,
+  body {
+    background: #fff !important;
+    overflow: visible !important;
+    height: auto !important;
+  }
+
+  /* Site chrome never belongs on paper (the resume's own <header> stays) */
+  header.navbar-fixed,
+  footer,
+  .custom-scrollbar-overlay,
+  #global-loader {
+    display: none !important;
+  }
+
+  /* Tighter type on paper so the resume fits two pages */
+  .resume-sheet {
+    font-size: 11.5px !important;
+    line-height: 1.4 !important;
+  }
+  .resume-sheet h1 {
+    font-size: 26px !important;
+  }
+  .resume-sheet section {
+    margin-bottom: 12px !important;
+  }
+  .resume-sheet h2 {
+    padding-bottom: 4px !important;
+    margin-bottom: 8px !important;
+  }
+  /* Keep section titles with their first item instead of orphaned at a page end */
+  .resume-sheet h2 {
+    break-after: avoid;
+  }
+
+  /* Undo loader/reveal effects that might still be mid-flight */
+  main,
+  main.page-reveal-active {
+    opacity: 1 !important;
+    visibility: visible !important;
+    animation: none !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  .resume-sheet {
+    max-width: none !important;
+    box-shadow: none !important;
+  }
+
+  .resume-sheet a {
+    color: inherit;
+    text-decoration: none;
+  }
+}

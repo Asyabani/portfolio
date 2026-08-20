@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Brand mark: white N + teal dot on site navy (matches the site's "N" ball) -->
+  <rect width="64" height="64" rx="14" fill="#050b23"/>
+  <path d="M19 47 V17 L41 47 V17" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="51" cy="43.5" r="4.5" fill="#2dd4bf"/>
+</svg>

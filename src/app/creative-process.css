@@ -1,0 +1,505 @@
+/* ──────────────────────────────────────────────────
+   Creative Process – About Page
+   All classes use a `cp-` prefix to avoid collisions.
+   ────────────────────────────────────────────────── */
+
+:root {
+  --font-cp: var(--font-dm-sans), 'DM Sans', sans-serif;
+  --cp-text-color: rgba(245, 245, 245, 0.9);
+}
+
+/* ── Wrapper ─────────────────────────────────────── */
+/* Sentence case + the site's light/dark section tokens, so the page reads
+   as one family with the homepage instead of the original CodePen look */
+.cp-wrapper {
+  font-family: var(--font-cp);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  overflow-x: hidden;
+  width: 100%;
+  color: #0f172a;
+  background-color: #f0f1fa;
+}
+
+.dark .cp-wrapper {
+  color: #f5f6ff;
+  background-color: #030711;
+}
+
+/* ── Scroll container ────────────────────────────── */
+.cp-scroll-container {
+  position: relative;
+  background-color: #f0f1fa;
+}
+
+.dark .cp-scroll-container {
+  background-color: #030711;
+}
+
+/* ── Fixed section ───────────────────────────────── */
+.cp-fixed-section {
+  height: 1100vh;
+  position: relative;
+  background-color: #f0f1fa;
+}
+
+.dark .cp-fixed-section {
+  background-color: #030711;
+}
+
+.cp-fixed-container {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  will-change: transform, height;
+  transform-origin: top center;
+  background-color: #f0f1fa;
+}
+
+.dark .cp-fixed-container {
+  background-color: #030711;
+}
+
+/* ── Background images ───────────────────────────── */
+.cp-background-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+  background-color: #000;
+}
+
+.cp-background-image {
+  position: absolute;
+  top: -10%;
+  left: 0;
+  width: 100%;
+  height: 120%;
+  object-fit: cover;
+  opacity: 0;
+  filter: brightness(0.8);
+  will-change: transform;
+  transform-origin: center center;
+}
+
+.cp-background-image.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.cp-background-image.previous {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* Navy→teal grade over every photo — ties the imagery to the site palette
+   and keeps the white text above it readable */
+.cp-background-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: linear-gradient(
+    175deg,
+    rgba(5, 11, 35, 0.5) 0%,
+    rgba(5, 11, 35, 0.15) 45%,
+    rgba(13, 148, 136, 0.22) 100%
+  );
+}
+
+/* ── Grid layout ─────────────────────────────────── */
+.cp-grid-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
+  padding: 0 2rem;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Header ──────────────────────────────────────── */
+.cp-header {
+  grid-column: 1 / 13;
+  align-self: start;
+  padding-top: 9.4vh;
+  font-size: 6vw;
+  font-weight: 400;
+  line-height: 0.9;
+  text-align: center;
+  color: var(--cp-text-color);
+  will-change: transform, filter, opacity;
+}
+
+.cp-header-row {
+  display: block;
+}
+
+/* ── Footer ──────────────────────────────────────── */
+.cp-footer {
+  grid-column: 1 / 13;
+  align-self: end;
+  padding-bottom: 5vh;
+  font-size: 6vw;
+  font-weight: 400;
+  line-height: 0.9;
+  text-align: center;
+  color: var(--cp-text-color);
+  will-change: transform, filter, opacity;
+  transition:
+    filter 0.5s ease,
+    opacity 0.5s ease;
+}
+
+/* ── Progress indicator ──────────────────────────── */
+.cp-progress-indicator {
+  width: 160px;
+  height: 1px;
+  margin: 2vh auto 0;
+  position: relative;
+  background-color: rgba(245, 245, 245, 0.3);
+}
+
+.cp-progress-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background-color: #2dd4bf;
+  transition: width 0.3s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.cp-progress-numbers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--cp-text-color);
+  font-family: var(--font-cp);
+  letter-spacing: -0.02em;
+  transform: translateY(-50%);
+  margin: 0 -25px;
+}
+
+/* ── Blur state ──────────────────────────────────── */
+.cp-footer.blur,
+.cp-left-column.blur,
+.cp-right-column.blur {
+  filter: blur(8px);
+  opacity: 0.3;
+  transition:
+    filter 0.8s ease,
+    opacity 0.8s ease;
+}
+
+.cp-featured.blur {
+  filter: blur(8px);
+  opacity: 0.3;
+  transition:
+    filter 0.8s ease,
+    opacity 0.8s ease;
+}
+
+/* ── Content ─────────────────────────────────────── */
+.cp-content {
+  grid-column: 1 / 13;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: absolute;
+  top: 60%;
+  left: 0;
+  transform: translateY(-50%);
+  padding: 0 2rem;
+  will-change: transform;
+}
+
+/* ── Left column ─────────────────────────────────── */
+.cp-left-column {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  text-align: left;
+  will-change: filter, opacity;
+  transition:
+    filter 0.5s ease,
+    opacity 0.5s ease;
+}
+
+/* ── Right column ────────────────────────────────── */
+.cp-right-column {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  text-align: right;
+  will-change: filter, opacity;
+  transition:
+    filter 0.5s ease,
+    opacity 0.5s ease;
+}
+
+/* ── Featured (center) ───────────────────────────── */
+.cp-featured {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1.5vw;
+  position: relative;
+  height: 10vh;
+  overflow: hidden;
+  will-change: filter, opacity;
+  transition:
+    filter 0.5s ease,
+    opacity 0.5s ease;
+}
+
+.cp-featured-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.cp-featured-content.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cp-featured-content h3 {
+  white-space: nowrap;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  margin: 0;
+  font-weight: 500;
+  color: var(--cp-text-color);
+}
+
+/* ── SplitText word masks ────────────────────────── */
+.cp-word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.cp-split-word {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* ── Artist items (left) ─────────────────────────── */
+.cp-artist {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--cp-text-color);
+  cursor: pointer;
+  position: relative;
+  padding-left: 0;
+}
+
+.cp-artist:hover {
+  opacity: 1 !important;
+}
+
+.cp-artist.loaded {
+  opacity: 0.3;
+  transform: translateY(0);
+}
+
+.cp-artist.active {
+  opacity: 1;
+  color: #5eead4;
+  transform: translateX(10px);
+  padding-left: 15px;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cp-artist.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  background-color: #5eead4;
+  border-radius: 50%;
+}
+
+/* ── Category items (right) ──────────────────────── */
+.cp-category {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--cp-text-color);
+  cursor: pointer;
+  position: relative;
+  padding-right: 0;
+}
+
+.cp-category:hover {
+  opacity: 1 !important;
+}
+
+.cp-category.loaded {
+  opacity: 0.3;
+  transform: translateY(0);
+}
+
+.cp-category.active {
+  opacity: 1;
+  color: #5eead4;
+  transform: translateX(-10px);
+  padding-right: 15px;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cp-category.active::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  background-color: #5eead4;
+  border-radius: 50%;
+}
+
+/* ── Loading overlay ─────────────────────────────── */
+.cp-loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  color: #000;
+  font-size: 1.5rem;
+  font-family: var(--font-cp);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+.cp-loading-counter {
+  margin-left: 0.5rem;
+}
+
+/* ── End section ─────────────────────────────────── */
+.cp-end-section {
+  font-size: 2rem;
+  height: 100vh;
+  position: relative;
+  background-color: #f0f1fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dark .cp-end-section {
+  background-color: #030711;
+}
+
+.cp-fin {
+  transform: rotate(90deg);
+  position: sticky;
+  top: 50vh;
+  color: #0f172a;
+}
+
+.dark .cp-fin {
+  color: #f5f6ff;
+}
+
+/* ── Debug info ──────────────────────────────────── */
+.cp-debug-info {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  color: #000;
+  padding: 10px;
+  font-size: 12px;
+  z-index: 9000;
+  font-family: monospace;
+  display: none;
+}
+
+/* ── Mobile ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  .cp-content {
+    flex-direction: column;
+    gap: 5vh;
+    top: 50%;
+  }
+
+  .cp-right-column {
+    display: none;
+  }
+
+  .cp-left-column,
+  .cp-featured {
+    width: 100%;
+    text-align: center;
+  }
+
+  .cp-featured {
+    font-size: 5vw;
+    order: -1;
+    margin-bottom: 2vh;
+  }
+
+  /* Long titles ("Building Impactful Digital Products") must wrap on
+     narrow screens instead of overflowing past both edges */
+  .cp-featured-content h3 {
+    white-space: normal;
+    line-height: 1.15;
+  }
+
+  .cp-header,
+  .cp-footer {
+    font-size: 10vw;
+  }
+
+  .cp-progress-indicator {
+    width: 120px;
+  }
+
+  .cp-artist.active {
+    transform: translateX(0);
+    padding-left: 0;
+  }
+
+  .cp-artist.active::before {
+    display: none;
+  }
+}
