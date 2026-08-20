@@ -28,6 +28,8 @@ export function HeroAnimated() {
   const ovalRef = useRef<SVGEllipseElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const photoRef = useRef<HTMLDivElement>(null);
+  // Mobile-only identity chip (avatar + name/role) shown instead of the big photo
+  const chipRef = useRef<HTMLDivElement>(null);
   const loaderReady = useLoaderReady();
   const { theme } = useTheme();
   const isDark = theme === 'dark';
@@ -68,8 +70,10 @@ export function HeroAnimated() {
       ...chars4,
     ];
 
+    const introEls = [introRef.current, chipRef.current].filter(Boolean);
+
     gsap.set(allChars, { opacity: 0, y: 20 });
-    gsap.set(introRef.current, { opacity: 0, y: 12 });
+    gsap.set(introEls, { opacity: 0, y: 12 });
     gsap.set(ctaRef.current, { opacity: 0, y: 20 });
     gsap.set(photoRef.current, { opacity: 0, scale: 0.9, x: 40 });
 
@@ -82,8 +86,8 @@ export function HeroAnimated() {
 
     const tl = gsap.timeline();
 
-    // Name + role eyebrow leads the sequence
-    tl.to(introRef.current, {
+    // Name + role eyebrow (or mobile chip) leads the sequence
+    tl.to(introEls, {
       opacity: 1,
       y: 0,
       duration: 0.6,
@@ -151,10 +155,35 @@ export function HeroAnimated() {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-9 sm:gap-12 lg:gap-8">
           {/* ── Left: Headline ── */}
           <div className="flex-1 max-w-2xl">
+            {/* Mobile: avatar + name/role chip replaces eyebrow and big photo */}
+            <div
+              ref={chipRef}
+              className="mb-6 flex items-center gap-3.5 md:hidden"
+            >
+              <span className="relative block h-14 w-14 shrink-0 overflow-hidden rounded-full shadow-md ring-2 ring-primary/40 dark:ring-teal-400/40">
+                <Image
+                  src="/img/profile-2026.jpg"
+                  alt="Nurzaman Asyabani"
+                  fill
+                  sizes="56px"
+                  className="object-cover object-top"
+                  priority
+                />
+              </span>
+              <span className="flex flex-col gap-1 text-[11px] font-semibold uppercase">
+                <span className="tracking-[0.18em] text-dark dark:text-white">
+                  Nurzaman Asyabani
+                </span>
+                <span className="tracking-[0.18em] text-primary dark:text-teal-400">
+                  Fullstack Developer
+                </span>
+              </span>
+            </div>
+
             {/* Eyebrow: who + what — the one line a visitor should read first */}
             <p
               ref={introRef}
-              className="mb-5 md:mb-7 flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] sm:text-xs font-semibold tracking-[0.18em] sm:tracking-[0.28em] uppercase"
+              className="mb-5 md:mb-7 hidden md:flex flex-wrap items-center gap-x-3 gap-y-1 text-[11px] sm:text-xs font-semibold tracking-[0.18em] sm:tracking-[0.28em] uppercase"
             >
               <span className="text-dark dark:text-white">Nurzaman Asyabani</span>
               <span
@@ -246,10 +275,10 @@ export function HeroAnimated() {
             </div>
           </div>
 
-          {/* ── Right: Profile Photo ── */}
+          {/* ── Right: Profile Photo (tablet & desktop; mobile shows the chip) ── */}
           <div
             ref={photoRef}
-            className="shrink-0 flex items-center justify-center"
+            className="hidden md:flex shrink-0 items-center justify-center"
           >
             <div className="relative w-44 h-44 sm:w-80 sm:h-80 lg:w-104 lg:h-104 rounded-full overflow-hidden bg-white/5 shadow-2xl">
               <Image
