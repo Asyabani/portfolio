@@ -116,9 +116,29 @@ export function ProjectCardAnimated({ project }: { project: Project }) {
       );
     }
 
-    // Animate tags with random character typing effect
+    // Animate tags. On phones the char-scramble is skipped entirely: random
+    // glyphs have different widths, so the line re-wraps mid-animation and
+    // bounces the card below it — a plain fade keeps the height stable.
     const tagsContainer = card.querySelector('.tags-container');
-    if (tagsContainer) {
+    if (tagsContainer && isMobile) {
+      gsap.fromTo(
+        tagsContainer,
+        { opacity: 0, y: 8 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          delay: 0.15,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 95%',
+            end: 'bottom 20%',
+            toggleActions,
+          },
+        }
+      );
+    } else if (tagsContainer) {
       const text = tagsContainer.textContent || '';
       const chars = text.split('');
 
