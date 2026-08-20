@@ -130,7 +130,7 @@ export function CertificateTimeline({ groups }: CertificateTimelineProps) {
             >
               <h2
                 data-year-label
-                className="overflow-hidden self-start text-5xl font-bold tracking-tight text-dark/20 dark:text-white/15 lg:sticky lg:top-32 lg:col-span-2 lg:text-6xl"
+                className="overflow-hidden self-start text-4xl md:text-5xl font-bold tracking-tight text-dark/20 dark:text-white/15 lg:sticky lg:top-32 lg:col-span-2 lg:text-6xl"
               >
                 <span className="block">{group.year}</span>
               </h2>

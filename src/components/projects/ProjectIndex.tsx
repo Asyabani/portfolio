@@ -225,7 +225,7 @@ export function ProjectIndex({ projects }: ProjectIndexProps) {
     >
       <div className="container mx-auto px-6 sm:px-10 lg:px-16 xl:px-24">
         <div className="mb-8 flex flex-wrap items-baseline gap-x-4 gap-y-2">
-          <h2 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
+          <h2 className="text-3xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
             All projects
           </h2>
           <span className="text-sm text-slate-500 dark:text-white/40">
@@ -246,7 +246,7 @@ export function ProjectIndex({ projects }: ProjectIndexProps) {
                 type="button"
                 aria-pressed={isActive}
                 onClick={() => setActiveCategory(name)}
-                className={`rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.15em] transition-colors duration-300 ${
+                className={`rounded-full border px-3.5 py-1.5 text-[11px] md:px-4 md:py-2 md:text-xs font-semibold uppercase tracking-[0.15em] transition-colors duration-300 ${
                   isActive
                     ? 'border-transparent bg-primary text-white dark:bg-teal-400 dark:text-[#050b23]'
                     : 'border-dark/15 text-slate-600 hover:border-primary/60 hover:text-primary dark:border-white/15 dark:text-white/60 dark:hover:border-teal-300/60 dark:hover:text-teal-300'
@@ -286,7 +286,7 @@ export function ProjectIndex({ projects }: ProjectIndexProps) {
                   className="absolute inset-0 origin-left scale-x-0 bg-primary/[0.05] transition-transform duration-500 ease-out group-hover:scale-x-100 dark:bg-teal-400/[0.06]"
                   aria-hidden="true"
                 />
-                <span className="relative text-xl font-semibold tracking-tight transition-[transform,color] duration-300 group-hover:translate-x-2 group-hover:text-primary dark:group-hover:text-teal-300 md:col-span-5 md:text-2xl">
+                <span className="relative text-lg font-semibold tracking-tight transition-[transform,color] duration-300 group-hover:translate-x-2 group-hover:text-primary dark:group-hover:text-teal-300 md:col-span-5 md:text-2xl">
                   {project.title}
                 </span>
                 <span className="flex items-center gap-3 md:contents">

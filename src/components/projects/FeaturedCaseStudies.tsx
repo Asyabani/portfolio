@@ -155,7 +155,7 @@ export function FeaturedCaseStudies({
         <div className="mb-10 flex flex-wrap items-end justify-between gap-6 md:mb-24">
           <h2
             data-cs-heading
-            className="overflow-hidden text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl"
+            className="overflow-hidden text-3xl font-bold tracking-tight sm:text-5xl lg:text-6xl"
           >
             <span className="block">Case studies</span>
           </h2>
@@ -233,7 +233,7 @@ export function FeaturedCaseStudies({
                     {period && <> · {period}</>}
                   </p>
 
-                  <h3 className="text-3xl font-bold tracking-tight md:text-4xl xl:text-[2.75rem] xl:leading-[1.05]">
+                  <h3 className="text-2xl font-bold tracking-tight md:text-4xl xl:text-[2.75rem] xl:leading-[1.05]">
                     <Link
                       href={project.url}
                       className="transition-colors duration-300 hover:text-primary dark:hover:text-teal-300"

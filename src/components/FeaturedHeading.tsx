@@ -77,7 +77,7 @@ export function FeaturedHeading({
   return (
     <h2
       ref={containerRef}
-      className={`font-normal text-4xl sm:text-5xl lg:text-[8rem] leading-none text-dark dark:text-white ${className}`.trim()}
+      className={`font-normal text-3xl sm:text-5xl lg:text-[8rem] leading-none text-dark dark:text-white ${className}`.trim()}
     ></h2>
   );
 }

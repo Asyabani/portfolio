@@ -109,7 +109,7 @@ export function CertificatesHero({
         ref={contentRef}
         className="container mx-auto px-6 pb-14 pt-36 sm:px-10 md:pb-16 lg:px-16 xl:px-24"
       >
-        <h1 className="text-[clamp(3.2rem,11vw,8.5rem)] font-bold leading-[0.95] tracking-tight">
+        <h1 className="text-[clamp(2.5rem,11vw,8.5rem)] font-bold leading-[0.95] tracking-tight">
           <span className="block overflow-hidden" data-hero-line>
             <span className="block">Proof of</span>
           </span>

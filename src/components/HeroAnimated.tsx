@@ -167,7 +167,7 @@ export function HeroAnimated() {
             </p>
 
             {/* One h1 for the page; each visual line is a block span */}
-            <h1 className="text-[2rem] sm:text-[2.4rem] md:text-5xl lg:text-6xl xl:text-[5rem] font-bold leading-[1.1] tracking-tight text-dark/50 dark:text-white/55">
+            <h1 className="text-[1.75rem] sm:text-[2.4rem] md:text-5xl lg:text-6xl xl:text-[5rem] font-bold leading-[1.15] sm:leading-[1.1] tracking-tight text-dark/50 dark:text-white/55">
               {/* Line 1: "Web design that" */}
               <span ref={line1Ref} className="block" />
 
@@ -233,13 +233,13 @@ export function HeroAnimated() {
             >
               <Link
                 href="/projects"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-primary text-white hover:bg-teal-700 dark:bg-teal-400 dark:text-[#050b23] dark:hover:bg-teal-300 text-xs font-semibold tracking-[0.2em] uppercase px-8 sm:px-10 py-4 rounded-full shadow-[0_10px_30px_rgba(13,148,136,0.28)] transition-all duration-300"
+                className="inline-flex items-center justify-center gap-3 bg-primary text-white hover:bg-teal-700 dark:bg-teal-400 dark:text-[#050b23] dark:hover:bg-teal-300 text-[11px] sm:text-xs font-semibold tracking-[0.2em] uppercase px-6 sm:px-10 py-3 sm:py-4 rounded-full shadow-[0_10px_30px_rgba(13,148,136,0.28)] transition-all duration-300"
               >
                 View My Projects
               </Link>
               <a
                 href={socialLinks.email}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 border border-dark/30 dark:border-white/30 text-dark/80 dark:text-white/80 hover:text-dark dark:hover:text-white hover:border-dark/70 dark:hover:border-white/70 text-xs font-semibold tracking-[0.2em] uppercase px-8 sm:px-10 py-4 rounded-full transition-all duration-300"
+                className="inline-flex items-center justify-center gap-3 border border-dark/30 dark:border-white/30 text-dark/80 dark:text-white/80 hover:text-dark dark:hover:text-white hover:border-dark/70 dark:hover:border-white/70 text-[11px] sm:text-xs font-semibold tracking-[0.2em] uppercase px-6 sm:px-10 py-3 sm:py-4 rounded-full transition-all duration-300"
               >
                 Let&apos;s Talk
               </a>

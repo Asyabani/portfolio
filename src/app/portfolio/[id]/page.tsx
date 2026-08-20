@@ -106,7 +106,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
                 </>
               )}
             </p>
-            <h1 className="mt-3 text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight uppercase">
+            <h1 className="mt-3 text-3xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight uppercase">
               {project.title}
             </h1>
             {project.description && (
