@@ -353,7 +353,7 @@ export function NavigationAnimated() {
   };
 
   const navContainerBaseClass =
-    'w-full md:max-w-6xl mx-auto px-4 sm:px-6 py-6 transition-colors duration-500';
+    'w-full md:max-w-6xl mx-auto px-4 sm:px-6 py-4 md:py-6 transition-colors duration-500';
   const navContainerColorClass = isProjectsPage
     ? isScrolled
       ? isDark
@@ -384,7 +384,7 @@ export function NavigationAnimated() {
           <Link
             ref={logoRef}
             href="/"
-            className={`group text-lg md:text-2xl font-bold overflow-hidden inline-block ${
+            className={`group text-base md:text-2xl font-bold overflow-hidden inline-block ${
               isAboutPage
                 ? isScrolled
                   ? 'text-white md:text-dark md:dark:text-white'
@@ -609,7 +609,7 @@ export function NavigationAnimated() {
             >
               {navLinks.map(link => {
                 const itemClass =
-                  'group relative block px-9 py-3 text-xl font-medium text-gray-800 first:rounded-t-3xl last:rounded-b-3xl transition-colors overflow-hidden';
+                  'group relative block px-7 py-2.5 text-base font-medium text-gray-800 first:rounded-t-3xl last:rounded-b-3xl transition-colors overflow-hidden';
                 const label = (
                   <span className="relative inline-block h-[1.25em] overflow-hidden align-middle">
                     <span className="block transition-transform duration-300 ease-in-out group-hover:-translate-y-full">
@@ -652,22 +652,22 @@ export function NavigationAnimated() {
               }`}
             >
               <form onSubmit={handleSubscribe}>
-                <p className="text-2xl font-medium tracking-tight text-dark">
+                <p className="text-lg font-medium tracking-tight text-dark">
                   Subscribe to our newsletter
                 </p>
-                <div className="mt-4 flex items-center gap-2">
+                <div className="mt-3 flex items-center gap-2">
                   <input
                     type="email"
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     placeholder="Your email"
                     required
-                    className="flex-1 rounded-xl bg-dark/10 px-4 py-3 text-sm text-dark placeholder:text-dark/60 focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    className="flex-1 rounded-xl bg-dark/10 px-4 py-2.5 text-sm text-dark placeholder:text-dark/60 focus:outline-none focus:ring-2 focus:ring-primary/50"
                   />
                   <button
                     type="submit"
                     aria-label="Subscribe to newsletter"
-                    className="flex h-12 w-12 items-center justify-center rounded-full bg-transparent text-slate-900 transition"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-transparent text-slate-900 transition"
                   >
                     <ArrowRight className="h-5 w-5" />
                   </button>
@@ -677,7 +677,7 @@ export function NavigationAnimated() {
 
             <a
               href={socialLinks.email}
-              className="block text-center px-5 py-3 rounded-full text-base font-semibold bg-dark text-white hover:bg-dark/90 transition-colors"
+              className="block text-center px-5 py-3 rounded-full text-sm font-semibold bg-dark text-white hover:bg-dark/90 transition-colors"
               onClick={() => setIsOpen(false)}
             >
               LET&apos;S TALK
