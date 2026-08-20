@@ -167,6 +167,7 @@ export const resumeProjectIds = ['kartinis-bms', 'kawalu', 'architract', 'movora
 
 export const resumeCertifications = [
   'Junior Web Developer — VSGA Digital Talent Scholarship, KOMINFO (Aug 2023)',
+  'Best Team — Certificate of Achievement, GITS Academy · SMKDEV (Sep 2024)',
   'Dicoding — Front-End Web untuk Pemula (2024), Dasar Pemrograman Web & JavaScript (2023), Memulai Pemrograman dengan Kotlin (2022)',
   'Edspert.id mini bootcamps — Introduction to React JS, Introduction to Flutter (2023)',
   'Progate — Web Development Path, Node.js (2020)',

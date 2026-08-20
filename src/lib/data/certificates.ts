@@ -21,6 +21,14 @@ export const certificates: Certificate[] = [
     linkType: 'detail',
   },
   {
+    id: 'gits-best-team',
+    title: 'Best Team — Certificate of Achievement, GITS Academy',
+    issuer: 'GITS Academy · SMKDEV',
+    date: 'Sep 2024',
+    image: '/img/gits-best-team.webp',
+    linkType: 'detail',
+  },
+  {
     id: 'dicoding-frontend',
     title: 'Belajar Membuat Front-End Web untuk Pemula',
     issuer: 'Dicoding',
