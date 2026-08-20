@@ -106,7 +106,7 @@ export const aboutExperience: ExperienceItem[] = [
   {
     company: 'PT. GITS Indonesia',
     role: 'Fullstack Developer (Bootcamp)',
-    period: '2023',
+    period: '2024',
     location: 'Bandung',
     points: [
       'Completed an intensive fullstack bootcamp covering React.js, Go, Flutter, and Docker through project-based training.',
