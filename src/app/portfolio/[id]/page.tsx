@@ -114,7 +114,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
                 {project.description}
               </p>
             )}
-            {(project.period || project.role) && (
+            {(project.period || project.role || project.poweredBy) && (
               <dl className="mt-6 flex flex-wrap gap-x-10 gap-y-4">
                 {project.period && (
                   <div>
@@ -133,6 +133,16 @@ export default async function ProjectPage({ params }: { params: Params }) {
                     </dt>
                     <dd className="mt-1 text-sm sm:text-base font-medium">
                       {project.role}
+                    </dd>
+                  </div>
+                )}
+                {project.poweredBy && (
+                  <div>
+                    <dt className="text-[11px] font-semibold uppercase tracking-[0.25em] text-secondary dark:text-gray-400">
+                      Powered by
+                    </dt>
+                    <dd className="mt-1 text-sm sm:text-base font-medium">
+                      {project.poweredBy}
                     </dd>
                   </div>
                 )}

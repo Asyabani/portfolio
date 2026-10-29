@@ -18,6 +18,12 @@ export interface Project {
   // ── Case-study fields (rendered on /portfolio/[id] when present) ──
   period?: string;
   role?: string;
+  /**
+   * Pihak yang mendukung/mendanai proyek — dirender sebagai kolom "Powered by"
+   * di samping Period dan My role. Terpisah dari `role` supaya kreditnya berdiri
+   * sendiri dan tidak terbaca sebagai bagian dari jabatan.
+   */
+  poweredBy?: string;
   status?: ProjectStatus;
   liveUrl?: string;
   /** Button label for liveUrl when it isn't the product itself (default "Visit site") */
@@ -355,24 +361,28 @@ export const projects: Project[] = [
   {
     id: 'siapqurban',
     title: 'Siapqurban',
-    tags: ['PWA', 'QURBAN', 'BANK BJB', 'PROGRESSIVE'],
+    tags: ['PWA', 'QURBAN', 'POWERED BY BJB', 'PROGRESSIVE'],
     image: '/img/sq.png',
     category: 'PWA',
     linkType: 'detail',
     url: '/portfolio/siapqurban',
-    role: 'Frontend developer (EGDev, supported by Bank BJB)',
+    description:
+      'Qurban commerce PWA for ordering and tracking sacrificial animals through the season. Powered by Bank BJB.',
+    role: 'Frontend developer in the EGDev team',
+    poweredBy: 'Bank BJB',
     status: 'archived',
   },
   {
     id: 'siapqurban-v2',
     title: 'Siapqurban V2',
-    tags: ['PWA', 'QURBAN', 'QURAN', 'SEDEKAH', 'BANK BJB'],
+    tags: ['PWA', 'QURBAN', 'QURAN', 'SEDEKAH', 'POWERED BY BJB'],
     image: '/img/sqv2.png',
     category: 'PWA',
     linkType: 'detail',
     url: '/portfolio/siapqurban-v2',
     description:
-      'Second-generation qurban PWA that streamlines donations, reporting, and volunteer coordination.',
+      'Second-generation qurban PWA that streamlines donations, reporting, and volunteer coordination. Powered by Bank BJB.',
+    poweredBy: 'Bank BJB',
     status: 'private',
   },
   {
