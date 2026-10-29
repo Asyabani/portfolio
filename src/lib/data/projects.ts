@@ -182,7 +182,7 @@ export const projects: Project[] = [
       'Marketplace for architecture and 3D visual assets, rewritten from Express + EJS to SvelteKit on the front and a Go API (chi + pgx) on PostgreSQL 16 — JWT auth in httpOnly cookies, Docker, Dokploy deploy.',
     period: 'Aug 2026 — present',
     role: 'Sole developer on the rewrite — frontend, API, data migration blueprint, deployment',
-    status: 'in-progress',
+    status: 'live',
     liveUrl: 'https://architract.opendev.id/',
     stack: [
       'SvelteKit',
