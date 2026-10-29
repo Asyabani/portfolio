@@ -123,6 +123,8 @@ export const projects: Project[] = [
     period: 'Apr 2026 — present',
     role: 'Sole developer (EGDev project for Kartinis Label) — architecture, data model, API, UI, testing, deployment; direct contact with the client team',
     status: 'private',
+    liveUrl: 'https://bms.thekartinis.co',
+    liveLabel: 'Open the app',
     stack: [
       'Next.js 15',
       'TypeScript',
@@ -181,6 +183,7 @@ export const projects: Project[] = [
     period: 'Aug 2026 — present',
     role: 'Sole developer on the rewrite — frontend, API, data migration blueprint, deployment',
     status: 'in-progress',
+    liveUrl: 'https://architract.opendev.id/',
     stack: [
       'SvelteKit',
       'TypeScript',
